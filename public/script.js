@@ -26,6 +26,7 @@ function newQuote() {
   loading();
   // Pick a random quote from array
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+
   // Check if Author field is blank and replace it with 'Unknown'
   if (!quote.author) {
     authorText.textContent = 'Unknown';
@@ -43,27 +44,16 @@ function newQuote() {
   complete();
 }
 
-// Get Quotes From API
-async function getQuotes() {
-  // loading();
-  const apiUrl = 'https://type.fit/api/quotes';
-  try {
-    const response = await fetch(apiUrl);
-    // apiQuotes = await response.json();
-    // newQuote();
-  } catch (error) {
-    // Catch Error Here
-  }
-}
-
-async function test() {
+async function getTitle() {
   try {
     const { data } = await axios.get('/title');
     h1.textContent = data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-async function test2() {
+async function getQuotes() {
   loading();
   try {
     const { data } = await axios.get('/data');
@@ -85,5 +75,4 @@ newQuoteBtn.addEventListener('click', newQuote);
 twitterBtn.addEventListener('click', tweetQuote);
 
 // On Load
-// getQuotes();
-test2();
+getQuotes();
